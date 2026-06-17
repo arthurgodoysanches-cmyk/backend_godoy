@@ -1,9 +1,9 @@
 const turma = [
-    { nome: 'Arthur', nota: 8 },
-    { nome: 'Bruno', nota: 7 },
-    { nome: 'Mateus', nota: 6 },
-    { nome: 'João ', nota: 7 },
-    { nome: 'Emanuel', nota: 8 }
+    { nome: 'Vozinha', nota: 8 },
+    { nome: 'Yamal', nota: 7 },
+    { nome: 'Neymar', nota: 6 },
+    { nome: 'Messi', nota: 7 },
+    { nome: 'Jorginho', nota: 8 }
 ];
 
 const turmaSituacao = turma.map(aluno => ({
