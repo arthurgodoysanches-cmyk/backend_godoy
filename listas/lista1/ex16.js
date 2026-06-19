@@ -8,7 +8,7 @@ const turma = [
 
 const turmaSituacao = turma.map(aluno => ({
     ...aluno,
-    situacao: aluno.nota >= 7 ? 'Aprovado' : 'Reprovado'
+    situacao: aluno.nota >= 7 ? "Aprovado" : 'Reprovado'
 }));
 
 const aprovados = turmaSituacao.filter(aluno => aluno.situacao === 'Aprovado');
