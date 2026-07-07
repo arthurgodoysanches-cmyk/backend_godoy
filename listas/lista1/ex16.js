@@ -17,3 +17,5 @@ const mediaGeral = turma.reduce((acum, aluno) => acum + aluno.nota, 0) / turma.l
 console.log(turmaSituacao);
 console.log('Aprovados:', aprovados.length);
 console.log('Média geral:', mediaGeral);
+
+mateus polaco
