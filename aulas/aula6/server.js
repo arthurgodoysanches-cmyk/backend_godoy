@@ -1,84 +1,50 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-
 app.use(express.json());
 
-let produtos = [
-    { id: 1, nome: "Mouse", preco: 50 },
-    { id: 2, nome: "Teclado", preco: 100 }
+let jogadores = [
+  { id: 1, nome: "Neymar", time: "Santos", posicao: "Atacante" },
+  { id: 2, nome: "Messi", time: "Inter Miami", posicao: "Atacante" }
 ];
+let proximoId = 3;
 
-app.get("/produtos", (req, res) => {
-    res.json(produtos);
+app.get('/jogadores', (req, res) => {
+  res.json(jogadores);
 });
 
-app.get("/produtos/:id", (req, res) => {
-    let id = Number(req.params.id);
-
-    let produto = produtos.find(function(p) {
-        return p.id === id;
-    });
-
-    if (produto) {
-        res.json(produto);
-    } else {
-        res.status(404).json({
-            mensagem: "Produto não encontrado"
-        });
-    }
+app.get('/jogadores/:id', (req, res) => {
+  const jogador = jogadores.find(j => j.id == req.params.id);
+  if (!jogador) return res.status(404).json({ erro: 'Não encontrado' });
+  res.json(jogador);
 });
 
-app.post("/produtos", (req, res) => {
-    let produto = {
-        id: produtos.length + 1,
-        nome: req.body.nome,
-        preco: req.body.preco
-    };
-
-    produtos.push(produto);
-
-    res.status(201).json(produto);
+app.post('/jogadores', (req, res) => {
+  const novo = {
+    id: proximoId++,
+    nome: req.body.nome,
+    time: req.body.time,
+    posicao: req.body.posicao
+  };
+  jogadores.push(novo);
+  res.status(201).json(novo);
 });
 
-app.put("/produtos/:id", (req, res) => {
-    let id = Number(req.params.id);
+app.put('/jogadores/:id', (req, res) => {
+  const index = jogadores.findIndex(j => j.id == req.params.id);
+  if (index === -1) return res.status(404).json({ erro: 'Não encontrado' });
 
-    let produto = produtos.find(function(p) {
-        return p.id === id;
-    });
-
-    if (!produto) {
-        return res.status(404).json({
-            mensagem: "Produto não encontrado"
-        });
-    }
-
-    produto.nome = req.body.nome;
-    produto.preco = req.body.preco;
-
-    res.json(produto);
+  jogadores[index] = { ...jogadores[index], ...req.body, id: jogadores[index].id };
+  res.json(jogadores[index]);
 });
 
-app.delete("/produtos/:id", (req, res) => {
-    let id = Number(req.params.id);
+app.delete('/jogadores/:id', (req, res) => {
+  const index = jogadores.findIndex(j => j.id == req.params.id);
+  if (index === -1) return res.status(404).json({ erro: 'Não encontrado' });
 
-    let indice = produtos.findIndex(function(p) {
-        return p.id === id;
-    });
-
-    if (indice === -1) {
-        return res.status(404).json({
-            mensagem: "Produto não encontrado"
-        });
-    }
-
-    produtos.splice(indice, 1);
-
-    res.json({
-        mensagem: "Produto removido com sucesso"
-    });
+  jogadores.splice(index, 1);
+  res.json({ mensagem: 'Removido' });
 });
 
 app.listen(3000, () => {
-    console.log("Servidor rodando na porta 3000");
+  console.log('API rodando em http://localhost:3000');
 });

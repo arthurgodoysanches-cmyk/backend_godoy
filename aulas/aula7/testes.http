@@ -1,0 +1,45 @@
+GET http://localhost:3000/jogadores
+
+### Buscar por id (existe)
+GET http://localhost:3000/jogadores/1
+
+### Buscar id que não existe (404)
+GET http://localhost:3000/jogadores/999
+
+POST http://localhost:3000/jogadores
+Content-Type: application/json
+
+{
+  "nome": "Vinicius Jr",
+  "time": "Real Madrid",
+  "posicao": "Atacante",
+  "idade": 24
+}
+
+POST http://localhost:3000/jogadores
+Content-Type: application/json
+
+{
+  "nome": "Pedri",
+  "time": "Barcelona"
+}
+
+POST http://localhost:3000/jogadores
+Content-Type: application/json
+
+{
+  "nome": "Cristiano",
+  "time": "Al Nassr",
+  "posicao": "Atacante",
+  "idade": 80
+}
+
+PUT http://localhost:3000/jogadores/2
+Content-Type: application/json
+
+{
+  "time": "Barcelona",
+  "idade": 38
+}
+
+DELETE http://localhost:3000/jogadores/1
